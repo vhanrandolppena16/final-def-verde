@@ -11,15 +11,26 @@ import { getDatabase } from "firebase/database";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 // Your web app's Firebase configuration: Team48-verde2
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAUY1fplvSnPG4GF4T4xjIwCR8zTtV9a0A",
+//   authDomain: "team48-verde2-a29cb.firebaseapp.com",
+//   databaseURL: "https://team48-verde2-a29cb-default-rtdb.asia-southeast1.firebasedatabase.app",
+//   projectId: "team48-verde2-a29cb",
+//   storageBucket: "team48-verde2-a29cb.firebasestorage.app",
+//   messagingSenderId: "607317287701",
+//   appId: "1:607317287701:web:42b5c90140b4d4db767f1c",
+//   measurementId: "G-ETYXY8Q4QN"
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAUY1fplvSnPG4GF4T4xjIwCR8zTtV9a0A",
-  authDomain: "team48-verde2-a29cb.firebaseapp.com",
-  databaseURL: "https://team48-verde2-a29cb-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "team48-verde2-a29cb",
-  storageBucket: "team48-verde2-a29cb.firebasestorage.app",
-  messagingSenderId: "607317287701",
-  appId: "1:607317287701:web:42b5c90140b4d4db767f1c",
-  measurementId: "G-ETYXY8Q4QN"
+  apiKey: "AIzaSyAbeCWYZLyw6YjDteO6JWFGtxJF4zF8uIY",
+  authDomain: "final-verde-team48-fb5db.firebaseapp.com",
+  databaseURL: "https://final-verde-team48-fb5db-default-rtdb.firebaseio.com",
+  projectId: "final-verde-team48-fb5db",
+  storageBucket: "final-verde-team48-fb5db.firebasestorage.app",
+  messagingSenderId: "950190013665",
+  appId: "1:950190013665:web:945828c59016e75ee4cba0",
+  measurementId: "G-WZ19785LY5"
 };
 
 
