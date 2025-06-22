@@ -6,15 +6,26 @@ import getGrowthStage from "../Dashboard/dashboard_components/getGrowthStage";
 // Setting of standard growth duration of hydroponic plant in days
 const GROWTH_DURATION_DAYS = 30;
 
+// Calculate day number from the latest reset date
+const calculateDayNumber = (timestamp, resetDates) => {
+  const sortedResets = [...resetDates].sort((a, b) => a - b);
+
+  for (let i = sortedResets.length - 1; i >= 0; i--) {
+    if (timestamp >= sortedResets[i]) {
+      return Math.floor((timestamp - sortedResets[i]) / (1000 * 60 * 60 * 24)) + 1;
+    }
+  }
+
+  return 1;
+};
+
 const SensorTable = () => {
   // State to store sensor readings
   const [sensorData, setSensorData] = useState([]);
-  // State for tracking the plant's growth start date
-  // const [startDate, setStartDate] = useState(() => {
-  //   const saved = localStorage.getItem('plantStartDate');
-  //   return saved ? new Date(saved) : new Date();
-  // });
   const [startDate, setStartDate] = useState(null);
+
+  const [resetDates, setResetDates] = useState([]); // ❌ missing
+  const [newResetInput, setNewResetInput] = useState(""); // ❌ missing
 
 
   // State to toggle sort (false = newest first)
@@ -24,7 +35,7 @@ const SensorTable = () => {
   useEffect(() => {
     document.title = "Dataset | Verde";     // Changing the name of the tab
     
-    const sensorRef = ref(sensor_db, 'predictions_3'); // change it back to predictions_3
+    const sensorRef = ref(sensor_db, 'finaL-predictions'); // change it back to predictions_3
     
     const unsubscribe = onValue(sensorRef, (snapshot) => {
       if (snapshot.exists()) {
@@ -62,11 +73,25 @@ const SensorTable = () => {
     return () => unsubscribe();
   }, [sortAsc]); // sort direction is a dependency
 
-  // Resets the plant start date to now and saves it to localStorage
-  const handleResetStartDate = () => {
-    const now = new Date();
-    localStorage.setItem('plantStartDate', now.toISOString());
-    setStartDate(now);
+const handleAddResetDate = () => {
+    const parsedDate = new Date(newResetInput);
+    if (!isNaN(parsedDate)) {
+      const updatedResets = [...resetDates, parsedDate].sort((a, b) => a - b);
+      setResetDates(updatedResets);
+      localStorage.setItem(
+        'plantResetDates',
+        JSON.stringify(updatedResets.map(d => d.toISOString()))
+      );
+      setNewResetInput("");
+    } else {
+      alert("Invalid date");
+    }
+  };
+
+  // Clear all reset dates
+  const handleClearResetDates = () => {
+    setResetDates([]);
+    localStorage.removeItem('plantResetDates');
   };
 
   // Toggle the sorting order of the table  
@@ -74,17 +99,39 @@ const SensorTable = () => {
 
   return (
     // Whole Dataset Container
-    <div className="w-full h-[90%] p-6 bg-emerald-200 mt-15 rounded-[30px]">
-      {/* Header with reset button */}
+<div className="w-full h-[90%] p-6 bg-emerald-200 mt-15 rounded-[30px]">
+      {/* Header with reset date controls */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold">Sensor Readings Table</h2>
-        <button
-          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-[30px] shadow"
-          onClick={handleResetStartDate}
-        >
-          Reset Growth Start
-        </button>
+        <div className="flex items-center gap-2">
+          <input
+            type="date"
+            value={newResetInput}
+            onChange={(e) => setNewResetInput(e.target.value)}
+            className="px-2 py-1 rounded-lg border border-gray-400"
+          />
+          <button
+            onClick={handleAddResetDate}
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-[30px] shadow"
+          >
+            Add Reset Date
+          </button>
+          <button
+            onClick={handleClearResetDates}
+            className="bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded-[30px] shadow"
+          >
+            Clear All Resets
+          </button>
+        </div>
       </div>
+
+      {/* Reset date preview */}
+      {resetDates.length > 0 && (
+        <div className="mb-4 text-sm text-gray-700">
+          <strong>Reset Dates:</strong>{" "}
+          {resetDates.map(d => d.toISOString().split("T")[0]).join(", ")}
+        </div>
+      )}
 
       {/* Scrollable table container */}
       <div className="relative overflow-scroll max-h-[90%] rounded-xl shadow bg-white scrollbar-hide">
@@ -113,9 +160,7 @@ const SensorTable = () => {
           <tbody>
             {/* Render each row of sensor data */}
             {sensorData.map((entry) => {
-              const dayNum = Math.floor(
-                (entry.timestampObj - startDate) / (1000 * 60 * 60 * 24)
-              );
+              const dayNum = calculateDayNumber(entry.timestampObj, resetDates);
               return (
                 <tr key={entry.id} className="border-t">
                   <td className="py-2 px-4">{entry.timestamp}</td>
@@ -123,7 +168,7 @@ const SensorTable = () => {
                   <td className="py-2 px-4">{entry.humidity}</td>
                   <td className="py-2 px-4">{entry.ph}</td>
                   <td className="py-2 px-4">{entry.tds}</td>
-                  <td className="py-2 px-4">{dayNum >= 0 ? dayNum : 0}</td>
+                  <td className="py-2 px-4">{dayNum >= 0 ? dayNum : 1}</td>
                   <td className="py-2 px-4">{getGrowthStage(dayNum)}</td>
                   <td className="py-2 px-4">{entry.predicted_days}</td>{/**Apply the prediction here */}
                   <td className="py-2 px-4">{getGrowthStage(entry.predicted_days)}</td> 
