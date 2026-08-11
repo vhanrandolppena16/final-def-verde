@@ -2,6 +2,21 @@
 
 A web-based monitoring and decision-support system for automated hydroponic crop cultivation, integrating sensor monitoring, machine learning-based prediction, and model predictive control (MPC) concepts to support optimized crop growth and resource management.
 
+🌐 Live Application
+
+[Open the Hydroponics Monitoring System](https://verde-swart.vercel.app/dashboard)
+
+🔐 Demo Credentials
+
+The application requires login to access the monitoring dashboard.
+
+| Field        | Demo Credential       |
+| ------------ | --------------------- |
+| **Email**    | `testuser1@gmail.com` |
+| **Password** | `@Testuser1`          |
+
+Note: These credentials are provided for demonstration purposes only.
+
 ## 📌 Overview
 
 This project presents a **Machine Learning-Based Model Predictive Control System for Automated Hydroponic Crop Cultivation**.
