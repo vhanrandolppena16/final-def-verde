@@ -59,6 +59,8 @@ The dashboard provides an overview of the current hydroponic environment, includ
 
 It also displays the current plant growth stage and a live video feed of the hydroponic system, enabling efficient monitoring and decision-making.
 
+![alt text](https://github.com/vhanrandolppena16/final-def-verde/blob/main/Verde%20-%20Dashboard.png "Verde - Dashboard")
+
 ### 📈 Analytics
 
 The analytics page displays a time-series data visualization for key environmental parameters:
@@ -71,17 +73,25 @@ The analytics page displays a time-series data visualization for key environment
 
 Users can select either a single specific parameter or multiple ones to visualize their trend and monitor the fluctuations over time. This feature supports data-driven analysis, aiding in identifying patterns within the hydroponic system.
 
+![alt text](https://github.com/vhanrandolppena16/final-def-verde/blob/main/Verde%20-%20Analysis.png "Verde - Analytics")
+
 ### 🗃️ Dataset
 
 The dataset interface presents a structured table of recorded sensor readings, including timestamp, temperature, humidity, pH, total dissolved solids, and corresponding predicted growth stage. This feature allows users to track historical data for analysis, validation, monitoring, and research.
+
+![alt text](https://github.com/vhanrandolppena16/final-def-verde/blob/main/Verde%20-%20Data.png "Verde - Data")
 
 ### 🎛️ Control
 
 The control page provides the user with an interface to manually control various functions. This provides direct control over various functions when necessary, offering greater flexibility and responsiveness in different situations.
 
+![alt text](https://github.com/vhanrandolppena16/final-def-verde/blob/main/Verde%20-%20Control%20System.png "Verde - Control System")
+
 ### 🚨 Alerts
 
 The logs feature provides real-time alerts when sensor measurements fall outside the standard measurements, notifying the user of the potential issues. Additionally, it provides notifications when the values return to normal, allowing the user to monitor the system’s stability.
+
+![alt text](https://github.com/vhanrandolppena16/final-def-verde/blob/main/Verde%20-%20Logs.png "Verde - Logs")
 
 ### 🔐 Authentication
 
