@@ -185,31 +185,6 @@ This allows the frontend to be demonstrated without depending on the original Fi
 
 ---
 
-## 📂 Project Structure
-
-```text
-final-def-verde-main/
-│
-└── Frontend/
-    │
-    ├── public/
-    │   └── data/
-    │       └── verde-firebase-export.json
-    │
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── assets/
-    │   ├── localDatabase.js
-    │   └── ...
-    │
-    ├── package.json
-    ├── vite.config.js
-    └── ...
-```
-
----
-
 ## 👨‍💻 Project
 
 **Design of a Machine Learning-Based Model Predictive Control System for Automated Hydroponic Crop Cultivation**
